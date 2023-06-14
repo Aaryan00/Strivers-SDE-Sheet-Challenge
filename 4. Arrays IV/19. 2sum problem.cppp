@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<vector<int>> twoSum(vector<int>& nums, int target) {
+        vector<vector<int>>ans;
+        vector<int>temp;
+        unordered_map<int,int> mapp;
+        for(int i=0;i<nums.size();++i){
+            if(mapp.find(target - nums[i])!=mapp.end()){
+                cout<<mapp[target - nums[i]];
+                temp.push_back(mapp[target - nums[i]]);
+                temp.push_back(i);
+                ans.push_back(temp);
+            }
+            mapp[nums[i]] = i ; 
+        }
+        return ans;
+
+        // Code when we have to written all possiblities in sorted order
+        vector<vector<int>>ans;
+        unordered_map<int,int> mapp;
+        int val;
+        for(int i=0;i<nums.size();++i){
+            if(mapp.find(target - nums[i])!=mapp.end()){
+               vector<int>temp;
+               val = mapp[target - nums[i]];
+                temp.push_back(target - nums[i]);
+                temp.push_back(nums[i]);
+                sort(temp.begin(), temp.end());
+                while (val--) {
+                  ans.push_back(temp);
+                }
+            }
+            mapp[nums[i]]++ ; 
+        }
+        sort(ans.begin(), ans.end());
+        return ans;
+
+        // Code without using space, but this will not work if we have to use one value more than once
+
+//    sort(nums.begin(), nums.end());
+//    vector<vector<int>>ans;
+//    int left = 0;int right = nums.size()-1;
+//    while(left<right) {
+//      if (target == nums[left] + nums[right]) {
+//       //   cout<<nums[left]<<" "<<nums[right];
+//         vector<int>temp;
+//          temp.push_back(nums[left]);
+//          temp.push_back(nums[right]);
+//          ans.push_back(temp);
+//          left++;
+//          right--;
+
+//      } else if(target < nums[left] + nums[right]) {
+//               right--;
+//      } else {
+//          left++;
+//      }
+//    }
+    }
+};
+
+int main()
+{
+    int n = 5;
+    vector<int> arr = {2, 6, 5, 8, 11};
+    vector<vector<int>>res;
+    int target = 14;
+    Solution obj;
+    res = obj.twoSum(arr, target);
+    cout << "Index are: ";
+    return 0;
+}
